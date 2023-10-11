@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import sys
 
 def plot_data(csv_file, title):
     data = pd.read_csv(csv_file)
@@ -12,17 +13,9 @@ def plot_data(csv_file, title):
     plt.show()
 
 if __name__ == '__main__':
-    cold_flow_csv = 'cold-flow-data.csv'
-    hot_fire_csv = 'hot-fire-data.csv'
-
-    print("Select data to plot:")
-    print("1. Cold Flow Data")
-    print("2. Hot Fire Data")
-    choice = int(input("Enter 1 or 2: "))
-
-    if choice == 1:
-        plot_data(cold_flow_csv, "Cold Flow Data")
-    elif choice == 2:
-        plot_data(hot_fire_csv, "Hot Fire Data")
+    if len(sys.argv) != 2:
+        print("Usage: python3 plot-data.py <csv_file>")
     else:
-        print("Invalid choice")
+        csv_file = sys.argv[1]
+        title = input("Enter a title for the plot: ")
+        plot_data(csv_file, title)
